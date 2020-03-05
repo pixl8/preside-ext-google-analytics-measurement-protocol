@@ -1,0 +1,21 @@
+{
+    "name":"PresideCMS Extension: Google Analytics Measurement Protocol",
+    "type":"preside-extensions",
+    "version":"VERSION_NUMBER",
+    "location":"https://s3.eu-west-2.amazonaws.com/pixl8-public-packages/google-analytics-measurement-protocol/DOWNLOAD_LOCATION",
+    "private":false,
+    "author":"Pixl8 Interactive",
+    "directory":"application/extensions",
+    "repository":{
+        "type":"git",
+        "URL":"https://github.com/pixl8/preside-ext-google-analytics-measurement-protocol"
+    },
+    "slug":"preside-ext-google-analytics-measurement-protocol",
+    "projectURL":"https://github.com/pixl8/preside-ext-google-analytics-measurement-protocol",
+    "ignore":[
+        ".git/*",
+        ".gitignore",
+        ".travis.yml",
+        ".twgit_features_subject"
+    ]
+}

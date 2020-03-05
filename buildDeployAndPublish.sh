@@ -28,13 +28,14 @@ if [[ $TRAVIS_TAG == v* ]] || [[ $TRAVIS_BRANCH == release* ]] ; then
 	rm -rf $BUILD_DIR
 	mkdir -p $BUILD_DIR
 
-	echo "Building assets with grunt..."
-        cd assets
-        npm install || exit 1
-        grunt || exit 1
-        cd ../
-        echo "Done"
-
+	if [[ -d "assets" && -f "assets/Gruntfile.js" ]]; then
+		echo "Building assets with grunt..."
+		cd assets
+		npm install || exit 1
+		grunt || exit 1
+		echo "Done."
+		cd ..
+	fi
 
 	echo "Copying files to $BUILD_DIR..."
 	rsync -a ./ --exclude=".*" --exclude="$BUILD_DIR" --exclude="*.sh" --exclude="**/node_modules" --exclude="*.log" --exclude="tests" "$BUILD_DIR" || exit 1

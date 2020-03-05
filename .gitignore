@@ -1,2 +1,4 @@
 /.twgit_features_subject
 /.twgit
+/build
+npm-debug.log

@@ -1,6 +1,6 @@
 {
 	  "id"        : "preside-ext-google-analytics-measurement-protocol"
 	, "title"     : "Google Analytics Measurement Protocol"
-	, "author"    : ""
-	, "version"   : "1.0.0"
+	, "author"    : "Pixl8 Interactive"
+	, "version"   : "VERSION_NUMBER"
 }

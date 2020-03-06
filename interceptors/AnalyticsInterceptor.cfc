@@ -9,15 +9,21 @@ component extends="coldbox.system.Interceptor" {
 	}
 
 	public void function postRenderSiteTreePage( event ) {
-		if ( prc.keyExists( "_analytics" ) ) {
-			prc._analytics.addPageView( event.getBaseUrl() & event.getCurrentUrl(), prc.presidePage.title ?: "" );
+		if ( !prc.keyExists( "_analytics" ) ) {
+			return;
+		}
+
+		if ( prc._analytics.getPageView().isEmpty() ) {
+			prc._analytics.setPageView( event.getBaseUrl() & event.getCurrentUrl(), prc.presidePage.title ?: "" );
 		}
 	}
 
 	public void function postProcess( event ) {
-		if ( prc.keyExists( "_analytics" ) ) {
-			analyticsService.postPayloads( prc._analytics );
+		if ( !prc.keyExists( "_analytics" ) ) {
+			return;
 		}
+
+		analyticsService.postPayloads( prc._analytics );
 	}
 
 }

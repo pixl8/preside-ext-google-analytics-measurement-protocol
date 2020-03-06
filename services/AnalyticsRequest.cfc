@@ -18,9 +18,9 @@ component accessors=true {
 	property name="gclid"      type="string"  default="#url.gclid           ?: ''#";
 	property name="dclid"      type="string"  default="#url.dclid           ?: ''#";
 
-	property name="debug"      type="boolean";
+	property name="debugMode"  type="boolean";
 
-	property name="pageViews"  type="array";
+	property name="pageView"   type="struct";
 	property name="events"     type="array";
 	property name="dimensions" type="struct";
 	property name="metrics"    type="struct";
@@ -30,7 +30,7 @@ component accessors=true {
 		, required string  clientId
 		, required string  userId
 		,          string  dataSource = "web"
-		,          boolean debug      = false
+		,          boolean debugMode  = false
 	) {
 		setTid( arguments.propertyId );
 		setCid( arguments.clientId );
@@ -38,17 +38,17 @@ component accessors=true {
 			setUid( arguments.userId );
 		}
 		setDs( arguments.dataSource );
-		setDebug( arguments.debug );
+		setDebugMode( arguments.debugMode );
 
-		setPageViews( [] );
-		setEvents( [] );
-		setDimensions( {} );
-		setMetrics( {} );
+		variables.pageView   = {};
+		variables.events     = [];
+		variables.dimensions = {};
+		variables.metrics    = {};
 
 		return this;
 	}
 
-	public AnalyticsRequest function addPageView( required string uri, string title ) {
+	public AnalyticsRequest function setPageView( required string uri, string title ) {
 		var eventData = {
 			dl = arguments.uri
 		};
@@ -56,7 +56,7 @@ component accessors=true {
 			eventData.dt = arguments.title;
 		}
 
-		variables.pageViews.append( eventData );
+		variables.pageView = eventData;
 
 		return this;
 	}

@@ -23,7 +23,7 @@ component {
 			  clientId   = _getWebsiteVisitorService().getVisitorId()
 			, userId     = $getWebsiteLoggedInUserId()
 			, propertyId = site.analytics_property
-			, debug      = _getDebugMode()
+			, debugMode  = _getDebugMode()
 		);
 	}
 
@@ -40,7 +40,7 @@ component {
 		var endpoint = payloads.len() == 1 ? "/collect" : "/batch";
 		var payload  = payloads.toList( chr( 10 ) );
 
-		if ( arguments.analyticsRequest.getDebug() ) {
+		if ( arguments.analyticsRequest.getDebugMode() ) {
 			$systemOutput( "Analytics payload:" & chr( 10 ) & payload );
 		}
 
@@ -67,32 +67,10 @@ component {
 	private array function _buildPayloads( required AnalyticsRequest analyticsRequest ) {
 		var payloads = [];
 
-		payloads.append( _pageViewPayloads( arguments.analyticsRequest ), true );
-		payloads.append( _eventPayloads(    arguments.analyticsRequest ), true );
+		payloads.append( _pageView( arguments.analyticsRequest ), true );
+		payloads.append( _events(   arguments.analyticsRequest ), true );
 
 		return payloads;
-	}
-
-	private array function _pageViewPayloads( required AnalyticsRequest analyticsRequest ) {
-		var pageviews  = [];
-		var baseParams = arguments.analyticsRequest.baseParams( [ "v", "tid", "cid", "uid", "ds", "uip", "dr", "cn", "cs", "cm", "ck", "cc", "ci", "gclid", "dclid" ] );
-
-		for( var item in arguments.analyticsRequest.getPageviews() ) {
-			pageviews.append( _buildPayload( "pageview", item, baseParams ) );
-		}
-
-		return pageviews;
-	}
-
-	private array function _eventPayloads( required AnalyticsRequest analyticsRequest ) {
-		var events     = [];
-		var baseParams = arguments.analyticsRequest.baseParams( [ "v", "tid", "cid", "uid", "ds", "uip" ] );
-
-		for( var item in arguments.analyticsRequest.getEvents() ) {
-			events.append( _buildPayload( "event", item, baseParams ) );
-		}
-
-		return events;
 	}
 
 	private string function _buildPayload( required string type, required struct item, required string baseParams ) {
@@ -104,6 +82,29 @@ component {
 		}
 
 		return params.toList( "&" );
+	}
+
+	private array function _pageView( required AnalyticsRequest analyticsRequest ) {
+		var payloads   = [];
+		var baseParams = arguments.analyticsRequest.baseParams( [ "v", "tid", "cid", "uid", "ds", "uip", "dr", "cn", "cs", "cm", "ck", "cc", "ci", "gclid", "dclid" ] );
+		var pageview   = arguments.analyticsRequest.getPageview();
+
+		if ( !pageview.isEmpty() ) {
+			payloads.append( _buildPayload( "pageview", pageview, baseParams ) );
+		}
+
+		return payloads;
+	}
+
+	private array function _events( required AnalyticsRequest analyticsRequest ) {
+		var payloads   = [];
+		var baseParams = arguments.analyticsRequest.baseParams( [ "v", "tid", "cid", "uid", "ds", "uip" ] );
+
+		for( var item in arguments.analyticsRequest.getEvents() ) {
+			payloads.append( _buildPayload( "event", item, baseParams ) );
+		}
+
+		return payloads;
 	}
 
 

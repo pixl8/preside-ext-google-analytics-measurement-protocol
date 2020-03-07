@@ -48,9 +48,9 @@ component accessors=true {
 		return this;
 	}
 
-	public AnalyticsRequest function setPageView( required string uri, string title ) {
+	public AnalyticsRequest function setPageView( required string url, string title ) {
 		var eventData = {
-			dl = arguments.uri
+			dl = arguments.url
 		};
 		if ( arguments.keyExists( "title" ) ) {
 			eventData.dt = arguments.title;
@@ -89,7 +89,7 @@ component accessors=true {
 		return this;
 	}
 
-	public AnalyticsRequest function setMetric( required numeric index, required string value ) {
+	public AnalyticsRequest function setMetric( required numeric index, required numeric value ) {
 		variables.metrics[ arguments.index ] = arguments.value;
 
 		return this;

@@ -47,13 +47,13 @@ component {
 		thread
 			action  = "run"
 			name    = createUuid()
-			uri     = "#baseUrl##endpoint#"
+			apiUrl  = "#baseUrl##endpoint#"
 			ua      = arguments.analyticsRequest.getUa()
 			payload = payload
 		{
 			http
 				method    = "POST"
-				url       = attributes.uri
+				url       = attributes.apiUrl
 				useragent = attributes.ua
 				timeout   = 5
 			{

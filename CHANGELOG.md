@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.2.1
+
+* Change interception points used
+
 ## v0.2.0
 
 * Slight refactoring, allow one pageview per request

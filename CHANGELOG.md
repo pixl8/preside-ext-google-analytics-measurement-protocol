@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.3.0
+* Updated README with elabrate working and usage details
+* Relocated configuration from Site to the System Configuration menu
+* Added ability to override page view tracking via a helper method `disableGamp`
+* Added ability to set a Custom Dimension for segmenting GAMP API hits - `Preside GAMP`
+* Added handler for making remote calls via `analytics.triggerEvent`
+* Updated and elaborated the i18n properties
+
 ## v0.2.1
 
 * Change interception points used

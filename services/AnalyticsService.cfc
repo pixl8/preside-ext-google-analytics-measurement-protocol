@@ -5,8 +5,8 @@
 component {
 // CONSTRUCTOR
 	/**
-	 * @websiteVisitorService.inject websiteVisitorService
-	 * @analyticsSettings.inject     coldbox:setting:analytics
+	 * @websiteVisitorService.inject      websiteVisitorService
+	 * @analyticsSettings.inject          coldbox:setting:analytics
 	 */
 	public any function init( required any websiteVisitorService, required struct analyticsSettings ) {
 		_setWebsiteVisitorService( arguments.websiteVisitorService );
@@ -17,17 +17,26 @@ component {
 
 //PUBLIC METHODS
 	public AnalyticsRequest function newRequest() {
-		var site = $getRequestContext().getSite();
+		var gampSettings         = $getPresideCategorySettings( "gamp-config" );
+		var analyticsProperty    = gampSettings.analytics_property     ?: "";
+		var analyticsDimensionId = gampSettings.analytics_dimension_id ?: "";
 
-		return new AnalyticsRequest(
+		var ar = new AnalyticsRequest (
 			  clientId   = _getWebsiteVisitorService().getVisitorId()
 			, userId     = $getWebsiteLoggedInUserId()
-			, propertyId = site.analytics_property
+			, propertyId = analyticsProperty
 			, debugMode  = _getDebugMode()
 		);
+
+		if( Len( trim( analyticsDimensionId ) ) && IsNumeric( analyticsDimensionId ) && analyticsDimensionId > 0 ) {
+			ar.setDimension( #analyticsDimensionId#, "Preside GAMP" );
+		}
+
+		return ar;
 	}
 
 	public void function postPayloads( required AnalyticsRequest analyticsRequest ) {
+
 		if ( !len( arguments.analyticsRequest.getTid() ) ) {
 			return;
 		}
@@ -60,6 +69,7 @@ component {
 				httpparam type="body" value=attributes.payload;
 			}
 		}
+
 	}
 
 

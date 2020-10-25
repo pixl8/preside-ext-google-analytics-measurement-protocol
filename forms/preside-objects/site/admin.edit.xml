@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<form>
-	<tab id="analytics" sortorder="100">
-		<fieldset id="analytics" sortorder="10">
-			<field binding="site.analytics_property" sortorder="10" control="textinput" />
-		</fieldset>
-	</tab>
-</form>

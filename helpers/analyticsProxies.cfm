@@ -6,6 +6,11 @@
 		var ev  = event ?: getRequestContext();
 		var prc = prc   ?: ev.getPrivateCollection();
 
+		if( arguments.method == "disableGamp" ) {
+			structDelete( prc, "_analytics" );
+			return;
+		}
+
 		if ( !prc.keyExists( "_analytics" ) ) {
 			return;
 		}

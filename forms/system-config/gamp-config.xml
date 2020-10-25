@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form i18nBaseUri="system-config.gamp-config:">
+	<tab id="gamp" sortorder="100" >
+		<fieldset id="gamp" sortorder="10">
+			<field name="analytics_property"     sortorder="10" control="textinput" />
+			<field name="analytics_dimension_id" sortorder="20" control="spinner" defaultValue="1" maxvalue="200" />
+		</fieldset>
+	</tab>
+</form>

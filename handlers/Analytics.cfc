@@ -9,7 +9,7 @@ component {
 			return;
 		}
 
-		if( method == "disableGamp" ) {
+		if( method == "disable" ) {
 			structDelete( "prc", "_analytics" );
 			return;
 		}

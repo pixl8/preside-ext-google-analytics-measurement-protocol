@@ -5,8 +5,8 @@
 component {
 // CONSTRUCTOR
 	/**
-	 * @websiteVisitorService.inject      websiteVisitorService
-	 * @analyticsSettings.inject          coldbox:setting:analytics
+	 * @websiteVisitorService.inject  websiteVisitorService
+	 * @analyticsSettings.inject      coldbox:setting:analytics
 	 */
 	public any function init( required any websiteVisitorService, required struct analyticsSettings ) {
 		_setWebsiteVisitorService( arguments.websiteVisitorService );
@@ -29,7 +29,7 @@ component {
 		);
 
 		if( Len( trim( analyticsDimensionId ) ) && IsNumeric( analyticsDimensionId ) && analyticsDimensionId > 0 ) {
-			ar.setDimension( #analyticsDimensionId#, "Preside GAMP" );
+			ar.setDimension( analyticsDimensionId, "Preside GAMP" );
 		}
 
 		return ar;

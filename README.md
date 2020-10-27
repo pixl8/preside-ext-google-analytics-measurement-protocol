@@ -25,7 +25,7 @@ Then, in the extension, you should set the "Analytics Dimension ID" value to be 
 If you ever wish to prevent the default page tracking e.g. if you're sending an AJAX request for tracking a custom event such as a button click, you can use the below method to remove the default page view tracking.
 ```java
 // Overriding page view tracking via a helper method available in the extension
-analytics( method="disableGamp" );
+analytics( method="disable" );
 ```
 
 ## Setting custom dimensions
@@ -65,11 +65,17 @@ analytics( "addEvent", { category="Test Category", action="Download", label="Tes
 /?event=analytics.triggerEvent&method=addEvent&category=Test%20Category&action=Trigger%20Event%20Action&label=Custom%20Event%20Triggered%20Label
 
 ## Debugging
-If you're working on implementing this extension into your application and wish to see the generated JSON, you can enable `debugMode` in the `Config.cfc`
+If you're working on implementing this extension into your application and wish to see the generated URL encoded string that has been generated, you can enable `debugMode` in the `Config.cfc`
 
 ```java
 settings.analytics.debugMode = true; // Default is false
 ```
+
+The output is sent to the standard output stream which normally is available in your Lucee `/lucee/logs/server.out.txt` file
+
+Simply search / grep for the prefix:
+`[INFO ] runwar.context: Preside System Output (rcpath) [2020-10-27 09:30:37]: Analytics payload:`
+
 
 ### Example JSON output
 ```javascript
@@ -114,10 +120,10 @@ settings.analytics.debugMode = true; // Default is false
 ```
 
 ## Warning re Cookie Control Frameworks
-Please note that if your application is using a Cookie Control extension or framework, please ensure you implement something to prevent the GAMP API calls creating "double-hits" if the user accepts the cookies and the scripts lod.
+Please note that if your application is using a Cookie Control extension or framework, please ensure you implement something to prevent the GAMP API calls creating "double-hits" if the user accepts the cookies and the scripts load.
 
 For example, the Civic Cookie Control plugin/framework sets a cookie called `CookieControl` which contains a serialised JSON object of the users preferences.
-This could be checked for existence and if set, the users choices used in a condition to set the `analytics( method="disableGamp" );` which will disable the GAMP API call.
+This could be checked for existence and if set, the users choices used in a condition to set the `analytics( method="disable" );` which will disable the GAMP API call.
 
 The CookieBot cookie is called `CookieConsent`.
 

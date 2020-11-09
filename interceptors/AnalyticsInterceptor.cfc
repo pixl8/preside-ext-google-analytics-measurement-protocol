@@ -4,8 +4,14 @@ component extends="coldbox.system.Interceptor" {
 
 	public void function configure() {}
 
-	public void function postPresideRequestCapture( event ) {
-		var ev     = rc.event ?: "";
+	public void function prePresideRequestCapture( event ) {
+		prc._analytics = prc._analytics ?: analyticsService.newRequest();
+
+		arguments.event.includeData( { analyticsTriggerEventEndpoint=event.buildLink( linkTo="Analytics.triggerEvent" ) } );
+	}
+
+	public void function postRender( event ) {
+		var ev     = arguments.event.getCurrentEvent() ?: "";
 		var ignore = [
 			  "^admin\."
 			, "^core\.AssetDownload\."
@@ -21,10 +27,6 @@ component extends="coldbox.system.Interceptor" {
 			}
 		}
 
-		prc._analytics = prc._analytics ?: analyticsService.newRequest();
-	}
-
-	public void function postRender( event ) {
 		if ( !prc.keyExists( "_analytics" ) ) {
 			return;
 		}

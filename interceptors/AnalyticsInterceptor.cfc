@@ -6,7 +6,9 @@ component extends="coldbox.system.Interceptor" {
 
 	public void function prePresideRequestCapture( event ) {
 		prc._analytics = prc._analytics ?: analyticsService.newRequest();
+	}
 
+	public void function postPresideRequestCapture( event ) {
 		arguments.event.includeData( { analyticsTriggerEventEndpoint=event.buildLink( linkTo="Analytics.triggerEvent" ) } );
 	}
 

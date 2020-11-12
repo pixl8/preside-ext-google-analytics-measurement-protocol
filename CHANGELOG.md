@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.3.2
+* Updating the CHANGELOG.md with recent version details
+
+## v0.3.1
+* Moving the inclusion of the `analyticsTriggerEventEndpoint` JS variable to the `postPresideRequestCapture` interception point so `buildLink` will work as expected
+
 ## v0.3.0
 * Updated README with elabrate working and usage details
 * Relocated configuration from Site to the System Configuration menu

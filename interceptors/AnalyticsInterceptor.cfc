@@ -17,6 +17,7 @@ component extends="coldbox.system.Interceptor" {
 		var ignore = [
 			  "^admin\."
 			, "^core\.AssetDownload\."
+			, "^api"
 		];
 
 		if ( !len( ev ) ) {

@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.3
+* Adding an exclusion for `api` calls e.g. `/api/k8s/maintenance/`
+
 ## v0.3.2
 * Updating the CHANGELOG.md with recent version details
 
@@ -15,21 +18,16 @@
 * Updated and elaborated the i18n properties
 
 ## v0.2.1
-
 * Change interception points used
 
 ## v0.2.0
-
 * Slight refactoring, allow one pageview per request
 
 ## v0.1.2 - v0.1.6
-
 * Get build script working!
 
 ## v0.1.1
-
 * Initial basic functionality
 
 ## v0.1.0
-
 * Initialise repo

@@ -34,7 +34,7 @@ component accessors=true {
 	) {
 		setTid( arguments.propertyId );
 		setCid( arguments.clientId );
-		if ( len( arguments.userId ) ) {
+		if ( len( trim( arguments.userId ) ) ) {
 			setUid( arguments.userId );
 		}
 		setDs( arguments.dataSource );
@@ -99,7 +99,7 @@ component accessors=true {
 		var params = [];
 
 		for( var field in arguments.fields ) {
-			if ( len( variables[ field ] ) ) {
+			if ( len( trim( variables[ field ] ) ) ) {
 				params.append( "#field#=#urlEncodedFormat( variables[ field ] )#" );
 			}
 		}

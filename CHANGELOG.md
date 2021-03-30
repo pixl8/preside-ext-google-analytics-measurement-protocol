@@ -1,5 +1,8 @@
 # Changelog
 
+## v0.3.4
+* Adding conditional logic to prevent blank attributes from being incuded
+
 ## v0.3.3
 * Adding an exclusion for `api` calls e.g. `/api/k8s/maintenance/`
 

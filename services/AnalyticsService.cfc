@@ -88,7 +88,9 @@ component {
 		params.append( "t=#arguments.type#" );
 
 		for( var key in arguments.item ) {
-			params.append( "#key#=#urlEncodedFormat( arguments.item[ key ] )#" );
+			if( Len( Trim( arguments.item[ key ] ?: "" ) ) ) {
+				params.append( "#key#=#urlEncodedFormat( arguments.item[ key ] )#" );
+			}
 		}
 
 		return params.toList( "&" );
